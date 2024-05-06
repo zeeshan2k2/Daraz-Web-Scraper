@@ -39,10 +39,6 @@ def scrape_daraz(search_query):
     # Find all div elements with class name "title-wrapper--IaQ0m" and ID "id-title"
     title_divs = soup.find_all("div", class_="title-wrapper--IaQ0m", id="id-title")
 
-    # Find all div elements with class name "rating--ZI3Ol" and "rating--pwPrV"
-    rating_divs = soup.find_all("div", class_=["rating--ZI3Ol", "rating--pwPrV"])
-
-
     rating_spans1 = soup.find_all("span",
                                  class_=["ratig-num--KNake rating--pwPrV"])
 
@@ -52,7 +48,7 @@ def scrape_daraz(search_query):
 
     products = []
 
-    print(len(title_divs),len(rating_spans1),len(reviews_span),len(price_spans))
+    # print(len(title_divs),len(rating_spans1),len(reviews_span),len(price_spans))
     # Extract product information
     for i in range(len(rating_spans1)):
         product_name = title_divs[i].text.strip() if title_divs else "N/A"
@@ -60,7 +56,7 @@ def scrape_daraz(search_query):
         rating_text = rating_spans1[i].text.strip() if rating_spans1 else "N/A"
         price_text = price_spans[i].text.strip() if price_spans else "N/A"
 
-        print(f"This is rating span {rating_spans1}")
+        # print(f"This is rating span {rating_spans1}")
 
         total_reviews_text = reviews_span[i].text.strip() if reviews_span else "N/A"
 
@@ -68,7 +64,7 @@ def scrape_daraz(search_query):
 
         products.append({"name": product_name, "rating": rating_text, "reviews": total_reviews,"price":price_text})
 
-        print(f"This is rating text {rating_text}")
+        # print(f"This is rating text {rating_text}")
 
 
 
@@ -81,7 +77,7 @@ def analyze_products(products):
     # For demonstration, let's assume we're doing sentiment analysis on product names
     # This would require a real sentiment analysis model, but for now, let's just randomly assign sentiments
     sentiments = ['Positive', 'Neutral', 'Negative']
-    print(products)
+    # print(products)
     for i in range(len(products)):
         rating = float(products[i]['rating'].split('/')[0])
         if rating>4:
